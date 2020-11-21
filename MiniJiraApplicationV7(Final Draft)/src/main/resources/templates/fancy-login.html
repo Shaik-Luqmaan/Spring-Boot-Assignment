@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Login Form</title>
+	<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+	/>
+	<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+	>
+	<link
+			rel="stylesheet"
+			type="text/css"
+			href="../static/css/forms.css"
+			th:href="@{/css/forms.css}"
+	/>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav
+		class="navbar is-link navb"
+		role="navigation"
+		aria-label="main navigation"
+>
+	<div class="navbar-brand">
+		<a class="navbar-item" th:href="@{/}">
+			<h3 class="title is-5 white">Mini Jira Application</h3>
+		</a>
+	</div>
+
+</nav>
+
+
+
+<section class="form-section">
+	<div class="form-div">
+		<form th:action="@{/authenticateTheUser}" method="post">
+
+			<div th:if="${param.error}">
+				<div class="notification is-danger is-light">
+					Invalid username or password.
+				</div>
+			</div>
+			<div th:if="${param.logout}">
+				<div class="notification is-info is-light">
+					You have been logged out.
+				</div>
+			</div>
+
+
+			<div class="control">
+				<label class="label">Username</label>
+				<input class="input is-hovered"
+					   name="username"
+					   type="text"
+					   placeholder="Username">
+			</div>
+			<br>
+			<div class="control">
+				<label class="label">Password</label>
+				<div class="control">
+					<input
+							class="input is-hovered"
+							name="password"
+							type="password"
+							placeholder="Password"
+					/>
+				</div>
+			</div>
+			<br>
+
+			<div class="field">
+				<button type="submit" class="button is-link"> Log In </button>
+			</div>
+
+		</form>
+	</div>
+</section>
+</body>
+</html>

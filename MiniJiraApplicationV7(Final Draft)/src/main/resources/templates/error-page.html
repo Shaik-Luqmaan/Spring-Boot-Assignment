@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../static/css/error.css"
+            th:href="@{/css/error.css}"
+    />
+    <!--Bulma css-->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    >
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../static/css/forms.css"
+            th:href="@{/css/forms.css}"
+    />
+    <meta charset="UTF-8" />
+    <title>Page Not Found</title>
+</head>
+<body>
+
+<div class="container">
+    <p class="title is-3">404 Error</p>
+    <br>
+    <p class="subtitle is-4">Oops! Page not found.</p>
+    <p class="subtitle is-4">Cannot find the page you're looking for.</p>
+    <hr>
+    <a th:href="@{/tasks/list}">Task List</a>
+</div>
+</body>
+</html>

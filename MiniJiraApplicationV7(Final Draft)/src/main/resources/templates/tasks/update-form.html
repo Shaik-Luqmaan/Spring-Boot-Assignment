@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <!--Bulma css-->
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+  >
+  <link
+          rel="stylesheet"
+          type="text/css"
+          href="../static/css/forms.css"
+          th:href="@{/css/forms.css}"
+  />
+  <title>Status Update</title>
+</head>
+
+<body>
+<nav
+        class="navbar is-link navb"
+        role="navigation"
+        aria-label="main navigation"
+>
+  <div class="navbar-brand">
+    <h2 class="title is-5 white">Mini Jira Application</h2>
+  </div>
+
+  <div class="navbar-end">
+
+      <form th:action="@{/logout}" method="POST">
+        <button class="button is-danger" type="submit">
+          Logout
+        </button>
+      </form>
+
+  </div>
+  </div>
+
+</nav>
+<br>
+
+<div class="container">
+
+  <div>
+    <p class="subtitle is-5">Name:</p>
+    <h6 class="title is-5" th:action="@{/tasks/showFormForAdd}"
+       th:object="${task}"  th:text="${task.assignee}"></h6>
+
+  </div>
+
+  <div style="margin-top: 15px">
+    <p class="subtitle is-5">Task:</p>
+    <h6 class="title is-5" th:action="@{/tasks/showFormForAdd}"
+       th:object="${task}" th:text="${task.taskName}"></h6>
+
+  </div>
+
+  <div style="margin-top: 15px">
+  <p class="subtitle is-5" style="margin-bottom: 6px">Your Status</p>
+
+
+  <form action="#" th:action="@{/tasks/processFormAfterUpdate(id=*{id})}"
+        th:object="${taskUpdate}" method="POST">
+
+    <div class="select">
+      <select th:field="*{status}">
+        <option th:value="'To-Do'" th:text="To-Do"></option>
+        <option th:value="'In-Progress'" th:text="In-Progress"></option>
+        <option th:value="'Done'" th:text="Done"></option>
+      </select>
+      </div>
+
+    <br>
+    <hr>
+    <button type="submit" class="button is-link">Save</button>
+
+  </form>
+  </div>
+<hr>
+  <a th:href="@{/tasks/list}">Back to List</a>
+</div>
+</body>
+
+</html>

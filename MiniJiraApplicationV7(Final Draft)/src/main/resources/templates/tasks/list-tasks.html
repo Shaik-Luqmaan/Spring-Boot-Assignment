@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!--Bulma css-->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    >
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../static/css/forms.css"
+            th:href="@{/css/forms.css}"
+    />
+
+    <title>Task Directory</title>
+</head>
+
+<body>
+<nav
+        class="navbar is-link navb"
+        role="navigation"
+        aria-label="main navigation"
+>
+    <div class="navbar-brand">
+        <h2 class="title is-5 white">Mini Jira Application</h2>
+    </div>
+
+    <div class="navbar-end">
+
+        <form th:action="@{/logout}" method="POST">
+            <button class="button is-danger" type="submit">
+                Logout
+            </button>
+        </form>
+
+    </div>
+    </div>
+
+</nav>
+
+<br>
+
+<div class="container">
+
+    <!-- Add a button -->
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+        <a th:href="@{/tasks/showFormForAdd}"
+        class="button is-link">
+        Add Task
+        </a>
+    </div>
+<br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <div sec:authorize="hasAnyRole('ROLE_EMPLOYEE','ROLE_ADMIN')">
+                <th>Name</th>
+                <th>Task</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+            </div>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempTask : ${tasks}">
+
+            <div sec:authorize="hasAnyRole('ROLE_EMPLOYEE','ROLE_ADMIN')">
+                <td th:text="${tempTask.assignee}" />
+                <td th:text="${tempTask.taskName}" />
+                <td th:text="${tempTask.email}" />
+                <td th:text="${tempTask.status}" />
+
+            </div>
+
+            <td>
+
+                <div sec:authorize="hasRole('EMPLOYEE')">
+                <!-- Add "update" button/link -->
+                <a th:href="@{/tasks/showFormForUpdate(id=${tempTask.id})}"
+                   class="button is-link">
+                    Update
+                </a>
+                </div>
+
+                <div sec:authorize="hasRole('ADMIN')">
+                <!-- Add "delete" button/link -->
+                <a th:href="@{/tasks/delete(id=${tempTask.id})}"
+                   class="button is-danger"
+                   onclick="if (!(confirm('Are you sure you want to delete this Task?'))) return false">
+                    Delete
+                </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+</html>
+
+

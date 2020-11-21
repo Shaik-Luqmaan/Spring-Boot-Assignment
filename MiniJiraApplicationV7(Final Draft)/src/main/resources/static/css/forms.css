@@ -1,0 +1,53 @@
+.white{
+  color: #ffffff;
+}
+.form-div {
+  margin: 0 auto;
+  width: 600px;
+  margin-top: 20px;
+  padding: 2rem;
+}
+
+.view-form {
+  margin: 0 auto;
+  width: 600px;
+  padding: 0 2rem 2rem 2rem;
+  border: 1px solid #dedad1;
+  border-radius: 2%;
+}
+
+.notification {
+  margin: 20px 0;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+}
+
+.complaint-field {
+  margin: 1.5rem 0;
+}
+
+.complaint-field p {
+  line-height: 1.3;
+  margin-top: 15px;
+}
+
+.section-404 {
+  margin: 5rem;
+}
+
+
+.textarea-hidden {
+  visibility: hidden;
+  margin: 0px !important;
+  padding: 0px !important;
+}
+.login{
+  align-content: center;
+}
+.navb {
+  min-height: 52px;
+  height: 52px;
+
+}

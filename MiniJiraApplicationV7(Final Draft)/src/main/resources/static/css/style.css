@@ -1,0 +1,30 @@
+footer .footer {
+  padding: 1rem !important;
+}
+
+.hero {
+  background: #e0eafc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #cfdef3,
+    #e0eafc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #cfdef3,
+    #e0eafc
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.hero-head,
+.hero-p {
+  color: black !important;
+}
+
+.hero-text a {
+  margin: 20px 0;
+}
+
+.hero-text {
+  padding: 9rem 3rem;
+}

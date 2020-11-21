@@ -1,0 +1,36 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 0.5em;
+  margin-top: 30px;
+}
+
+.card {
+  height: max-content;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.hero {
+  padding-top: 4rem;
+}
+
+.Resolved {
+  background-color: green;
+  height: 2px;
+}
+
+.Unresolved {
+  background-color: red;
+  height: 2px;
+}
+
+.Forwarded {
+  height: 2px;
+  background-color: yellow;
+}
+
+.small-bar {
+}
