@@ -27,6 +27,11 @@
             th:href="@{/css/forms.css}"
     />
 
+    <script type="text/javascript" language="javascript"
+            src="TableFilter/tablefilter.js">
+        var tf = setFilterGrid("table");
+    </script>
+
     <title>Task Directory</title>
 </head>
 
@@ -64,7 +69,11 @@
         Add Task
         </a>
     </div>
+
+
 <br>
+
+
     <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
