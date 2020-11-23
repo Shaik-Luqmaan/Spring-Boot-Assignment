@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Add Tasks</title>
     <link
             rel="stylesheet"
@@ -14,9 +15,6 @@
             href="../static/css/forms.css"
             th:href="@{/css/forms.css}"
     />
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -38,6 +36,47 @@
             href="../static/css/forms.css"
             th:href="@{/css/forms.css}"
     />
+
+
+    <!--Search list style-->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        #myUL {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #myUL li a {
+            border: 1px solid #ddd;
+            margin-top: -1px; /* Prevent double borders */
+            background-color: #f6f6f6;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            display: block
+        }
+
+        #myUL li a:hover:not(.header) {
+            background-color: #eee;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -74,8 +113,19 @@
 
             <div class="complaint-field">
                 <h4 class="title is-5">Name(*)</h4>
-            <input type="text" th:field="*{assignee}"
-                   class="form-control mb-4 col-4" placeholder="Assignee Name">
+
+                <div class="control">
+                    <div class="select">
+                        <select th:field="*{assignee}">
+                            <option th:value="'Luqmaan'" th:text="Luqmaan"></option>
+                            <option th:value="'Riaz'" th:text="Riaz"></option>
+                            <option th:value="'Mateen'" th:text="Mateen"></option>
+                            <option th:value="'Aziz'" th:text="Aziz"></option>
+                            <option th:value="'Rayyan'" th:text="Rayyan"></option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
 
             <p style="color:red" th:if="${#fields.hasErrors('taskName')}"
@@ -83,8 +133,28 @@
 
             <div class="complaint-field">
                 <h4 class="title is-5">Task(*)</h4>
-            <input type="text" th:field="*{taskName}"
-                   class="form-control mb-4 col-4" placeholder="Task">
+
+          <!--  <input type="text" th:field="*{taskName}"
+                   class="form-control mb-4 col-4" placeholder="Task">-->
+                <div class="control">
+                    <div class="select">
+                        <select th:field="*{taskName}">
+                            <option th:value="'Linux'" th:text="Linux"></option>
+                            <option th:value="'Networking'" th:text="Networking"></option>
+                            <option th:value="'Git'" th:text="Git"></option>
+                            <option th:value="'CleanCode'" th:text="CleanCode"></option>
+                            <option th:value="'OOPS'" th:text="OOPS"></option>
+                            <option th:value="'Java'" th:text="Java"></option>
+                            <option th:value="'DBMS'" th:text="DBMS"></option>
+                            <option th:value="'HTML'" th:text="HTML"></option>
+                            <option th:value="'CSS'" th:text="CSS"></option>
+                            <option th:value="'JavaScript'" th:text="JavaScript"></option>
+                            <option th:value="'React'" th:text="React"></option>
+                        </select>
+                    </div>
+                </div>
+
+
             </div>
 
             <p style="color:red" th:if="${#fields.hasErrors('email')}"
