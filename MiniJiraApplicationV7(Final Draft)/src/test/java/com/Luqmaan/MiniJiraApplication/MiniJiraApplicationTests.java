@@ -2,6 +2,7 @@ package com.Luqmaan.MiniJiraApplication;
 
 import com.Luqmaan.MiniJiraApplication.dao.TaskRepository;
 import com.Luqmaan.MiniJiraApplication.entity.Task;
+import com.Luqmaan.MiniJiraApplication.service.TaskService;
 import com.Luqmaan.MiniJiraApplication.service.TaskServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +25,7 @@ class MiniJiraApplicationTests {
 	private TaskRepository taskRepository;
 
 	@Autowired
-	private TaskServiceImpl taskServiceImpl;
+	private TaskService taskService;
 
 	List<Task> list = new ArrayList<Task>();
 
@@ -41,7 +42,7 @@ class MiniJiraApplicationTests {
 
 		Mockito.when(taskRepository.findAll()).thenReturn(list);
 
-		List<Task> taskList = taskRepository.findAll();
+		List<Task> taskList = taskService.findAll();
 
 		assertEquals(2,taskList.size());
 
@@ -54,7 +55,7 @@ class MiniJiraApplicationTests {
 
 		Mockito.when(taskRepository.findById(task.getId())).thenReturn(Optional.of(task));
 
-		assertEquals(task,taskServiceImpl.findById(task.getId()));
+		assertEquals(task,taskService.findById(task.getId()));
 	}
 
 	@Test
@@ -62,7 +63,7 @@ class MiniJiraApplicationTests {
 
 		Task task=new Task(4,"Aziz","Java","aziz@zemosolabs.com","Done");
 
-		taskServiceImpl.save(task);
+		taskService.save(task);
 
 		Mockito.verify(taskRepository,Mockito.times(1)).save(task);
 
@@ -73,7 +74,7 @@ class MiniJiraApplicationTests {
 
 		Task task=new Task(5,"Rayyan","CSS","rayyan@zemosolabs.com","Done");
 
-		taskServiceImpl.deleteById(task.getId());
+		taskService.deleteById(task.getId());
 
 		Mockito.verify(taskRepository, Mockito.times(1)).deleteById(task.getId());
 

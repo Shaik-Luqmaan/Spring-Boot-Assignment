@@ -1,8 +1,12 @@
 package com.Luqmaan.MiniJiraApplication.controller;
+
 import java.util.List;
 import com.Luqmaan.MiniJiraApplication.entity.Task;
 import com.Luqmaan.MiniJiraApplication.entity.TaskUpdate;
 import com.Luqmaan.MiniJiraApplication.service.TaskService;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/tasks")
+@Slf4j
 public class TaskController {
+
+    private Logger logger = LoggerFactory.getLogger(TaskController.class);
 
     @Autowired
     private TaskService taskService;
@@ -31,6 +37,8 @@ public class TaskController {
 
     @GetMapping("/list")
     public String listTasks(Model theModel, HttpServletRequest httpServletRequest){
+
+        logger.info("Listing tasks..");
 
         List<Task> theTasks = null;
         String assignee = httpServletRequest.getUserPrincipal().getName();
@@ -48,9 +56,13 @@ public class TaskController {
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
 
+        logger.info("Add form in admin");
+
         Task theTask = new Task();
         if(theTask == null){
+
             return "error-page";
+
         }
 
         theTask.setStatus("To-Do");
@@ -62,6 +74,7 @@ public class TaskController {
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("id") int theId,
                                     Model model) {
+
            Task theTask = taskService.findById(theId);
 
             model.addAttribute("task",theTask);
@@ -112,6 +125,8 @@ public class TaskController {
                                          @Valid @ModelAttribute("taskUpdate") TaskUpdate update,
                                          BindingResult bindingResult)  {
 
+
+
         if(bindingResult.hasErrors()) {
 
             return "/tasks/update-form";
@@ -149,7 +164,6 @@ public class TaskController {
         if(theTask == null){
             return "error-page";
         }
-
         theModel.addAttribute("task", theTask);
 
         return "/tasks/search";
