@@ -63,17 +63,21 @@
 
 <div class="container">
 
+    <div>
     <!-- Add a button -->
     <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
         <a th:href="@{/tasks/showFormForAdd}"
         class="button is-link">
         Add Task
         </a>
-    </div>
 
+        <a th:href="@{/tasks/showSearch}"
+           class="button is-success">
+            Search
+        </a>
 
+        </div>
 <br>
-
 
     <table class="table table-bordered">
         <thead class="thead-dark">
@@ -122,10 +126,10 @@
         </tr>
         </tbody>
     </table>
-
-
 </div>
-
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+        <a th:href="@{/tasks/list}">Full List</a>
+    </div>
 </body>
 </html>
 

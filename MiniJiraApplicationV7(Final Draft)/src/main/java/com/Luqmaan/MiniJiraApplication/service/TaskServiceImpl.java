@@ -53,4 +53,10 @@ public class TaskServiceImpl implements TaskService{
     public void deleteById(int theId) {
         taskRepository.deleteById(theId);
     }
+
+    @Override
+    @Transactional
+    public List<Task> searchBy(String theAssignee){
+        return taskRepository.findByAssigneeContainsAllIgnoreCase(theAssignee);
+    }
 }

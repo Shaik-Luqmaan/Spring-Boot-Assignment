@@ -124,5 +124,36 @@ public class TaskController {
         }
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam("assignee") String theAssignee,
+                         Model theModel) {
+        if (theAssignee.trim().isEmpty()) {
+            return "redirect:/tasks/list";
+        }
+        else {
+
+            List<Task> theTask =
+                    taskService.searchBy(theAssignee);
+
+            theModel.addAttribute("tasks", theTask);
+
+            return "tasks/list-tasks";
+        }
+
+    }
+
+    @GetMapping("/showSearch")
+    public String showSearch(Model theModel) {
+
+        Task theTask = new Task();
+        if(theTask == null){
+            return "error-page";
+        }
+
+        theModel.addAttribute("task", theTask);
+
+        return "/tasks/search";
+    }
+
 
 }

@@ -10,5 +10,6 @@ public interface TaskRepository  extends JpaRepository<Task, Integer> {
     List<Task> findByAssigneeOrderById(String assignee);
      List<Task> findAllByOrderByAssignee();
 
-//    List<Task> tasks = repository.findAll(Sort.by(Sort.Direction.ASC, "assignee"));
+     //Search
+    public List<Task> findByAssigneeContainsAllIgnoreCase(String theAssignee);
 }

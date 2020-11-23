@@ -10,4 +10,6 @@ public interface TaskService {
     public List<Task> findByAssignee(String assignee);
     public void save(Task theTask);
     public void deleteById(int theId);
+
+    public List<Task> searchBy(String theAssignee);
 }

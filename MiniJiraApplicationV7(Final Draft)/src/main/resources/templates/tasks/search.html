@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Add Tasks</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../static/css/forms.css"
+            th:href="@{/css/forms.css}"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+
+    <!--Bulma css-->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    >
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../static/css/forms.css"
+            th:href="@{/css/forms.css}"
+    />
+    <title>Search</title>
+</head>
+
+<body>
+<nav
+        class="navbar is-link navb"
+        role="navigation"
+        aria-label="main navigation"
+>
+    <div class="navbar-brand">
+        <h2 class="title is-5 white">Mini Jira Application</h2>
+    </div>
+
+    <div class="navbar-end">
+        <form th:action="@{/logout}" method="POST">
+            <button class="button is-danger" type="submit">
+                Logout
+            </button>
+        </form>
+
+    </div>
+    </div>
+</nav>
+
+<section class="form-section">
+<div class="form-div">
+<form action="#" th:action="@{/tasks/search}"
+      method="GET">
+
+    <div class="control">
+        <p class = "title">Search</p>
+        <hr>
+        <p class="subtitle">Please select Employee's Name to search</p>
+        <div class="control">
+            <div class="select">
+                <select name="assignee"
+                        type="search" >
+                    <option >Luqmaan</option>
+                    <option >Riaz</option>
+                    <option >Mateen</option>
+                    <option >Aziz</option>
+                    <option >Rayyan</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <button type="submit"
+            class="button is-success">Search</button>
+
+</form>
+</div>
+</section>
+</body>
+</html>
