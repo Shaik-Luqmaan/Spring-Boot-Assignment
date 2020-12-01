@@ -5,11 +5,10 @@ import com.Luqmaan.MiniJiraApplication.entity.Task;
 import java.util.List;
 
 public interface TaskService {
-    public List<Task> findAll();
-    public Task findById(int theId);
-    public List<Task> findByAssignee(String assignee);
-    public void save(Task theTask);
-    public void deleteById(int theId);
-
-    public List<Task> searchBy(String theAssignee);
+     List<Task> findAll();
+     Task findById(int theId);
+     List<Task> findByAssignee(String assignee);
+     void save(Task theTask);
+     void deleteById(int theId);
+     List<Task> searchBy(String theAssignee);
 }

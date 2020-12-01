@@ -1,19 +1,27 @@
 package com.Luqmaan.MiniJiraApplication.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="tasks")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Task {
 
     @Id
@@ -29,7 +37,7 @@ public class Task {
     @NotNull
     @Size(min=1,message = "Task is required")
     @Column(name="task_name")
-        private String taskName;
+    private String taskName;
 
     @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@zemosolabs\\.com$", message="Please enter a valid email")
     @Column(name="email")
@@ -40,55 +48,4 @@ public class Task {
     @Column(name="status")
     private String status;
 
-    public Task(){
-
-    }
-
-    public Task(int id, String assignee, String taskName,  String email, String status) {
-        this.id = id;
-        this.assignee = assignee;
-        this.taskName = taskName;
-        this.email = email;
-        this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-    }
-
-    public String getTaskName() {
-        return taskName;
-    }
-
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

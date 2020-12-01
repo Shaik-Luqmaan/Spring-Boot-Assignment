@@ -1,12 +1,11 @@
 package com.Luqmaan.MiniJiraApplication.controller;
 
 import java.util.List;
+
 import com.Luqmaan.MiniJiraApplication.entity.Task;
 import com.Luqmaan.MiniJiraApplication.entity.TaskUpdate;
 import com.Luqmaan.MiniJiraApplication.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +24,10 @@ import javax.validation.Valid;
 @Slf4j
 public class TaskController {
 
-    private Logger logger = LoggerFactory.getLogger(TaskController.class);
+    private  final TaskService taskService;
+    private static final String REDIRECT_TASKS_LIST = "redirect:/tasks/list";
 
     @Autowired
-    private TaskService taskService;
-
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
@@ -38,9 +36,9 @@ public class TaskController {
     @GetMapping("/list")
     public String listTasks(Model theModel, HttpServletRequest httpServletRequest){
 
-        logger.info("Listing tasks..");
+        log.info("Listing tasks");
 
-        List<Task> theTasks = null;
+        List<Task> theTasks;
         String assignee = httpServletRequest.getUserPrincipal().getName();
         boolean isAdmin = httpServletRequest.isUserInRole("ADMIN");
         if(isAdmin) {
@@ -56,16 +54,12 @@ public class TaskController {
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
 
-        logger.info("Add form in admin");
+        log.info("Add form in admin");
 
         Task theTask = new Task();
-        if(theTask == null){
-
-            return "error-page";
-
-        }
 
         theTask.setStatus("To-Do");
+
         theModel.addAttribute("task", theTask);
 
         return "/tasks/add-form";
@@ -75,13 +69,15 @@ public class TaskController {
     public String showFormForUpdate(@RequestParam("id") int theId,
                                     Model model) {
 
+          log.info("Form for Updating tasks");
+
            Task theTask = taskService.findById(theId);
 
             model.addAttribute("task",theTask);
             model.addAttribute("task",theTask);
 
             if(theTask == null){
-            return "error-page";
+                return "error-page";
             }
 
             TaskUpdate update = new TaskUpdate();
@@ -95,29 +91,35 @@ public class TaskController {
     @PostMapping("/save")
     public String saveTask(@ModelAttribute("task") Task theTask) {
 
+            log.info("Saving tasks..");
+
             taskService.save(theTask);
 
-            return "redirect:/tasks/list";
+            return REDIRECT_TASKS_LIST;
     }
 
     @GetMapping("/delete")
     public String delete(@RequestParam("id") int theId) {
 
-            taskService.deleteById(theId);
+        log.info("Deleting tasks..");
 
-        return "redirect:/tasks/list";
+        taskService.deleteById(theId);
+
+        return REDIRECT_TASKS_LIST;
     }
 
     @PostMapping("/processFormAfterAdd")
     public String processFormAfterAdd(@Valid @ModelAttribute("task") Task task,
                                          BindingResult bindingResult)  {
 
+        log.info("Processing from after add");
+
         if(bindingResult.hasErrors()) {
             return "/tasks/add-form";
         } else {
             taskService.save(task);
         }
-        return "redirect:/tasks/list";
+        return REDIRECT_TASKS_LIST;
     }
 
     @PostMapping("/processFormAfterUpdate")
@@ -125,7 +127,7 @@ public class TaskController {
                                          @Valid @ModelAttribute("taskUpdate") TaskUpdate update,
                                          BindingResult bindingResult)  {
 
-
+        log.info("Processing form after Update");
 
         if(bindingResult.hasErrors()) {
 
@@ -134,7 +136,7 @@ public class TaskController {
             Task task = taskService.findById(theId);
             task.setStatus(update.getStatus());
             taskService.save(task);
-            return "redirect:/tasks/list";
+            return REDIRECT_TASKS_LIST;
 
         }
     }
@@ -142,8 +144,11 @@ public class TaskController {
     @GetMapping("/search")
     public String search(@RequestParam("assignee") String theAssignee,
                          Model theModel) {
+
+        log.info("Searching tasks..");
+
         if (theAssignee.trim().isEmpty()) {
-            return "redirect:/tasks/list";
+            return REDIRECT_TASKS_LIST;
         }
         else {
 
@@ -160,10 +165,10 @@ public class TaskController {
     @GetMapping("/showSearch")
     public String showSearch(Model theModel) {
 
+        log.info("Show Search Page");
+
         Task theTask = new Task();
-        if(theTask == null){
-            return "error-page";
-        }
+
         theModel.addAttribute("task", theTask);
 
         return "/tasks/search";

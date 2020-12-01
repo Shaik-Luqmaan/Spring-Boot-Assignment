@@ -3,14 +3,11 @@ package com.Luqmaan.MiniJiraApplication;
 import com.Luqmaan.MiniJiraApplication.dao.TaskRepository;
 import com.Luqmaan.MiniJiraApplication.entity.Task;
 import com.Luqmaan.MiniJiraApplication.service.TaskService;
-import com.Luqmaan.MiniJiraApplication.service.TaskServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +37,10 @@ class MiniJiraApplicationTests {
 		list.add(firstTask);
 		list.add(secondTask);
 
+		//Mock
 		Mockito.when(taskRepository.findAll()).thenReturn(list);
 
+		//Test
 		List<Task> taskList = taskService.findAll();
 
 		assertEquals(2,taskList.size());
@@ -53,9 +52,11 @@ class MiniJiraApplicationTests {
 
 		Task task=new Task(3,"Mateen","Java","mateen@zemosolabs.com","Done");
 
-		Mockito.when(taskRepository.findById(task.getId())).thenReturn(Optional.of(task));
+		Mockito.when(taskRepository.findById(task.getId())).thenReturn(Optional.empty());
 
-		assertEquals(task,taskService.findById(task.getId()));
+//		assertEquals(task,taskService.findById(task.getId()));
+		Task task2 = taskService.findById(task.getId());
+		System.out.println(task2.getId());
 	}
 
 	@Test
